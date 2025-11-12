@@ -1,0 +1,63 @@
+# Simple Python Calculator with Menu
+
+def display_menu():
+    print("\n" + "="*30)
+    print("      SIMPLE CALCULATOR")
+    print("="*30)
+    print("Operations:")
+    print("  + : Addition")
+    print("  - : Subtraction")
+    print("  * : Multiplication")
+    print("  / : Division")
+    print("  % : Modulus (Remainder)")
+    print("  q : Quit")
+    print("="*30)
+
+def get_number(prompt):
+    while True:
+        try:
+            return float(input(prompt))
+        except ValueError:
+            print("Invalid input! Please enter a valid number.")
+
+def calculator():
+    display_menu()
+    
+    while True:
+        op = input("Enter operation (+, -, *, /, %, q to quit): ").strip().lower()
+        
+        if op == 'q':
+            print("Thank you for using the calculator!")
+            break
+        
+        if op not in ['+', '-', '*', '/', '%']:
+            print("Invalid operation! Please choose from +, -, *, /, %.")
+            continue
+        
+        num1 = get_number("Enter first number: ")
+        num2 = get_number("Enter second number: ")
+        
+        try:
+            if op == '+':
+                result = num1 + num2
+            elif op == '-':
+                result = num1 - num2
+            elif op == '*':
+                result = num1 * num2
+            elif op == '/':
+                if num2 == 0:
+                    print("Error: Division by zero!")
+                    continue
+                result = num1 / num2
+            elif op == '%':
+                if num2 == 0:
+                    print("Error: Modulus by zero!")
+                    continue
+                result = num1 % num2
+            
+            print(f"Result: {num1} {op} {num2} = {result}")
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
+
+# Run the calculator
+calculator()
